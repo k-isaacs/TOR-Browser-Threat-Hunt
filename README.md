@@ -1,9 +1,6 @@
 <p align="center">
-  <!-- Replace with your image -->
-  <img src="images/tor-logo.png" alt="TOR Threat Hunt Logo" width="300">
+  <img src="Images/Header.png" alt="TOR Threat Hunt Logo" width="900">
 </p>
-
-<h2 align="center">Threat Hunt Report: Detection of Unauthorized TOR Browser Usage</h2>
 
 ---
 
