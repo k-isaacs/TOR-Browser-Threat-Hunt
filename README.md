@@ -21,7 +21,7 @@
 
 ### Scenario
 
-Management suspects that employees might be using the TOR Browser to bypass network security controls after network logs showed unusual encrypted traffic patterns and connections to known TOR-related ports. Internal reporting also suggest that employees discussed ways to access restricted websites during work hours while avoiding normal monitoring. The objective of this threat hunt is to determine whether TOR Browser had been downloaded, installed, and actively used on the endpoint, identify any related file, process, and network activity, and document the findings so management could be notified if unauthorized TOR use was confirmed.
+Management suspects that employees might be using the TOR Browser to bypass network security controls after network logs showed unusual encrypted traffic patterns and connections to known TOR-related ports. Internal reporting also suggests that employees discussed ways to access restricted websites during work hours while avoiding normal monitoring. The objective of this threat hunt is to determine whether TOR Browser was downloaded, installed, and actively used on the endpoint, identify any related file, process, and network activity, and document the findings so management can be notified if unauthorized TOR use is confirmed.
 
 ---
 
@@ -63,14 +63,13 @@ the same session.
 
 <h3>2. Reviewed <code>DeviceProcessEvents</code> for tor installer execution</h3>
 <p>
-The <code>DeviceProcessEvents</code> table was reviewed for a ProcessCommandLine
-containing <code>tor-browser-windows-x86_64-portable-15.0.9.exe</code>. The results
-show the installer was executed from the Downloads folder on device ki-stigs. At
-2026-04-09T01:30:50.8034689Z, a ProcessCreated event shows labuser ran
-<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code>, and the command line
-included the <code>/S</code> switch, indicating the installer was executed silently.
-The result set also shows another process creation event for the same file, supporting
-that the tor package was actively run and not only present on disk.
+A ProcessCommandLine containing
+<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code> was reviewed on device
+ki-stigs. At 2026-04-09T01:30:50.8034689Z, a ProcessCreated event shows labuser ran
+<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code> from the Downloads folder,
+and the command line included the <code>/S</code> switch, indicating silent execution.
+An additional process creation event for the same file further supports that the package
+was actively run and not only present on disk.
 </p>
 
 <p><strong>Query used to locate events:</strong></p>
@@ -85,14 +84,12 @@ that the tor package was actively run and not only present on disk.
 
 <h3>3. Reviewed <code>DeviceProcessEvents</code> for tor browser execution</h3>
 <p>
-The <code>DeviceProcessEvents</code> table was reviewed for execution of
-<code>tor.exe</code>, <code>firefox.exe</code>, and <code>tor-browser.exe</code>.
-The results show browser execution beginning at 2026-04-09T01:35:10.2222606Z, when
-<code>firefox.exe</code> was first observed. Additional ProcessCreated events for
-<code>firefox.exe</code> appear throughout the result set, along with execution of
-<code>tor.exe</code> shortly afterward. This sequence is consistent with the tor
-browser being launched and then continuing to generate related browser and tor process
-activity after the initial execution.
+Execution of <code>tor.exe</code>, <code>firefox.exe</code>, and
+<code>tor-browser.exe</code> was reviewed on device ki-stigs. The results show browser
+execution beginning at 2026-04-09T01:35:10.2222606Z, when <code>firefox.exe</code> was
+first observed. Additional ProcessCreated events for <code>firefox.exe</code> and
+<code>tor.exe</code> followed shortly afterward, consistent with the tor browser and its
+supporting process launching successfully.
 </p>
 
 <p><strong>Query used to locate events:</strong></p>
@@ -108,15 +105,11 @@ activity after the initial execution.
 
 <h3>4. Reviewed <code>DeviceNetworkEvents</code> for tor-related network connections</h3>
 <p>
-The <code>DeviceNetworkEvents</code> table was reviewed for network connections tied to
-<code>tor.exe</code> and <code>firefox.exe</code> over known tor-related and relevant web
-ports. The results show successful connections beginning at
-2026-04-09T01:35:26.8247537Z. The observed traffic includes connections over
-<code>9001</code>, <code>443</code>, and localhost over <code>9150</code>. The result
-set shows remote IP connections on port <code>9001</code>, additional external
-connections over <code>443</code>, and a localhost connection over <code>9150</code>,
-which is consistent with tor-related network activity occurring shortly after browser
-launch.
+Network connections tied to <code>tor.exe</code> and <code>firefox.exe</code> were
+reviewed over known tor-related and relevant web ports. The results show successful
+connections beginning at 2026-04-09T01:35:26.8247537Z, including traffic over
+<code>9001</code>, <code>443</code>, and localhost over <code>9150</code>. This pattern
+is consistent with tor-related network activity occurring shortly after browser launch.
 </p>
 
 <p><strong>Query used to locate events:</strong></p>
@@ -134,8 +127,7 @@ launch.
 <h2>Chronological Event Timeline</h2>
 
 <p>
-This section provides a condensed sequence of the tor-related activity observed on device
-ki-stigs under the labuser account.
+This section summarizes the observed tor-related activity on device ki-stigs in chronological order.
 </p>
 
 <h3>1. Initial tor-related file activity in Downloads</h3>
@@ -174,7 +166,7 @@ ki-stigs under the labuser account.
 <h3>5. Tor-related network connections established</h3>
 <p>
 <strong>Timestamp:</strong> 2026-04-09T01:35:26.8247537Z<br>
-<strong>Event:</strong> Successful network connections associated with <code>tor.exe</code> and <code>firefox.exe</code> were observed shortly after launch. The earliest visible connection in the result set occurred over port <code>9001</code>, followed by additional connections over port <code>443</code> and a localhost connection over port <code>9150</code>.<br>
+<strong>Event:</strong> Successful network connections associated with <code>tor.exe</code> and <code>firefox.exe</code> were observed shortly after launch, including traffic over ports <code>9001</code>, <code>443</code>, and localhost over <code>9150</code>.<br>
 <strong>Action:</strong> Connection success detected.<br>
 <strong>Process:</strong> tor.exe / firefox.exe
 </p>
@@ -192,12 +184,9 @@ ki-stigs under the labuser account.
 <h2>Final Assessment</h2>
 
 <p>
-The reviewed file, process, and network events on device ki-stigs show that tor-related
-software was downloaded, executed silently, launched, and used under the labuser account
-during the reviewed time window. The evidence includes execution of
-<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code> with the <code>/S</code>
-switch, creation of tor-related files on the Desktop, launch of
-<code>firefox.exe</code> and <code>tor.exe</code>, and successful network connections
-consistent with tor activity. If this activity was not authorized, the device should be
-reviewed for containment and management should be notified for follow-on investigation.
+The reviewed file, process, and network events support that tor-related software was
+downloaded, executed silently, launched, and used on device ki-stigs under the labuser
+account during the reviewed time window. If this activity was not authorized, the device
+should be reviewed for containment and management should be notified for follow-on
+investigation.
 </p>
