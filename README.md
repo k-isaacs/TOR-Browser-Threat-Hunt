@@ -107,7 +107,6 @@ activity after the initial execution.
 
 <p><strong>Evidence:</strong></p>
 <p><img src="images/step3-deviceprocessevents-browser.png" alt="Step 3 - DeviceProcessEvents tor browser execution" style="max-width:100%; border:1px solid #ccc;"></p>
-<p><img src="images/step3-deviceprocessevents-browser-crop.png" alt="Step 3 - Cropped view of tor browser execution results" style="max-width:100%; border:1px solid #ccc; margin-top:10px;"></p>
 
 <hr>
 
