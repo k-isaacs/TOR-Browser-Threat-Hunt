@@ -26,7 +26,7 @@
     Browse a few websites through TOR to generate browser, process, and network activity.
     <ul>
       <li>Browsing standard websites through TOR is sufficient to generate the necessary logs.</li>
-      <li>To find valid Tor/.onion links that are still up, you can use this website: https://onion.live/</li>
+      <li>To find valid TOR/.onion links that are still up, you can use this website: https://onion.live/</li>
     </ul>
   </li>
   <li>Create a text file on the Desktop named <code>tor-shopping-list.txt</code> and add a few miscellaneous placeholder entries to generate file creation activity.</li>
@@ -40,18 +40,22 @@
 <table>
   <tr>
     <th>Table Name</th>
+    <th>Info</th>
     <th>Purpose</th>
   </tr>
   <tr>
     <td><strong>DeviceFileEvents</strong></td>
-    <td>Used to detect TOR-related file activity, including installer-related artifacts, Desktop file creation, and creation of <code>tor-shopping-list.txt</code>.</td>
+    <td><a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicefileevents-table">Microsoft Learn</a></td>
+    <td>Used to detect TOR-related file activity, including installer-related artifacts, Desktop file creation, creation of <code>tor-shopping-list.txt</code>, and deletion of that file if simulated.</td>
   </tr>
   <tr>
     <td><strong>DeviceProcessEvents</strong></td>
+    <td><a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceprocessevents-table">Microsoft Learn</a></td>
     <td>Used to detect silent execution of the TOR installer and subsequent launch of TOR browser-related processes such as <code>firefox.exe</code> and <code>tor.exe</code>.</td>
   </tr>
   <tr>
     <td><strong>DeviceNetworkEvents</strong></td>
+    <td><a href="https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicenetworkevents-table">Microsoft Learn</a></td>
     <td>Used to detect TOR-related network connections associated with <code>tor.exe</code> and <code>firefox.exe</code>, including traffic over ports commonly seen with TOR activity.</td>
   </tr>
 </table>
@@ -67,8 +71,9 @@ DeviceFileEvents
 | order by Timestamp desc
 
 // Detect silent execution of the TOR installer
+// In this lab, the command line showed a single space before /S
 DeviceProcessEvents
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-15.0.9.exe"
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-15.0.9.exe /S"
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 
 // Detect TOR browser-related process execution
@@ -79,12 +84,12 @@ DeviceProcessEvents
 
 // Detect TOR-related network connections
 DeviceNetworkEvents
-| where InitiatingProcessFileName in ("tor.exe", "firefox.exe")
-| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150", "80", "443")
+| where InitiatingProcessFileName in~ ("tor.exe", "firefox.exe")
+| where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150, 80, 443)
 | project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath
 | order by Timestamp desc
 
-// Detect creation of the shopping list file
+// Detect creation or deletion of the shopping list file
 DeviceFileEvents
 | where FileName contains "tor-shopping-list.txt"
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, InitiatingProcessAccountName
@@ -95,8 +100,15 @@ DeviceFileEvents
 
 <h2>Created By</h2>
 <ul>
-  <li><strong>Author Name:</strong> Keisha Isaacs </li>
-  <li><strong>Date:</strong> 04/12/26 </li>
+  <li><strong>Author Name:</strong> Keisha Isaacs</li>
+  <li><strong>Date:</strong> 04/12/26</li>
+</ul>
+
+<h2>Validated By</h2>
+<ul>
+  <li><strong>Reviewer Name:</strong></li>
+  <li><strong>Reviewer Contact:</strong></li>
+  <li><strong>Validation Date:</strong></li>
 </ul>
 
 ---
@@ -107,3 +119,20 @@ DeviceFileEvents
 </ul>
 
 ---
+
+<h2>Revision History</h2>
+
+<table>
+  <tr>
+    <th>Version</th>
+    <th>Changes</th>
+    <th>Date</th>
+    <th>Modified By</th>
+  </tr>
+  <tr>
+    <td>1.0</td>
+    <td>Initial draft</td>
+    <td>04/12/26</td>
+    <td>Keisha Isaacs</td>
+  </tr>
+</table>
