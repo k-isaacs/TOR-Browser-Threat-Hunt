@@ -21,7 +21,7 @@
 
 ### Scenario
 
-Unusual encrypted network traffic and connections to known TOR-related ports raised concerns that anonymity tools may be in use on the network. The objective of this threat hunt was to determine whether TOR Browser had been downloaded, installed, and actively used on the endpoint, and to analyze any associated activity.
+Management suspects that employees might be using the TOR Browser to bypass network security controls after network logs showed unusual encrypted traffic patterns and connections to known TOR-related ports. Internal reporting also suggest that employees discussed ways to access restricted websites during work hours while avoiding normal monitoring. The objective of this threat hunt is to determine whether TOR Browser had been downloaded, installed, and actively used on the endpoint, identify any related file, process, and network activity, and document the findings so management could be notified if unauthorized TOR use was confirmed.
 
 ---
 
