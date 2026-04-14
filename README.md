@@ -25,11 +25,11 @@ Management suspects that employees might be using the TOR Browser to bypass netw
 
 ---
 
-### High-Level TOR IoC Discovery Plan
+### Investigation Approach
 
-- Review **DeviceFileEvents** for TOR-related artifacts  
-- Analyze **DeviceProcessEvents** for evidence of execution and usage  
-- Examine **DeviceNetworkEvents** for outbound connections over TOR-associated ports 
+- Review **DeviceFileEvents** for TOR-related file artifacts  
+- Analyze **DeviceProcessEvents** for evidence of installation and browser execution  
+- Examine **DeviceNetworkEvents** for outbound connections over known TOR-associated ports
 
 ---
 
