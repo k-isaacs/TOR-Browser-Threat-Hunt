@@ -30,6 +30,7 @@
     </ul>
   </li>
   <li>Create a text file on the Desktop named <code>tor-shopping-list.txt</code> and add a few miscellaneous placeholder entries to generate file creation activity.</li>
+  <li>Delete the file.</li>
 </ol>
 
 ---
