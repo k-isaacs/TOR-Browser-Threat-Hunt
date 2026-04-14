@@ -60,8 +60,7 @@ Downloads and then appearing on the user’s Desktop during the same session.
 | order by Timestamp desc
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath, SHA256, Account = InitiatingProcessAccountName</code></pre>
 
-<p><strong>Evidence:</strong></p>
-<p><img src="Images/Step#1_Logs.jpg" alt="Step 1 - DeviceFileEvents tor-related file activity" style="max-width:100%; border:1px solid #ccc;"></p>
+<p><img src="Images/Step1_Logs.jpg" alt="Step 1 - DeviceFileEvents tor-related file activity" style="max-width:100%; border:1px solid #ccc;"></p>
 
 <hr>
 
