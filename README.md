@@ -184,9 +184,9 @@ This section summarizes the observed tor-related activity on device ki-stigs in 
 <h2>Final Assessment</h2>
 
 <p>
-The reviewed file, process, and network events support that tor-related software was
-downloaded, executed silently, launched, and used on device ki-stigs under the labuser
-account during the reviewed time window. If this activity was not authorized, the device
-should be reviewed for containment and management should be notified for follow-on
-investigation.
+The reviewed file, process, and network activity on device ki-stigs confirms that TOR Browser was downloaded, silently executed, launched, and used to establish connections over known TOR-associated ports under the labuser account. The observed activity window spans from 2026-04-09T01:26:48Z to 2026-04-09T01:50:55Z and includes the creation of <code>tor-shopping-list.txt</code> on the Desktop after TOR-related network activity began.
+</p>
+
+<p>
+TOR usage on this device is confirmed. It is recommended that the device be isolated and the user’s direct manager be notified to determine whether the activity was authorized and whether further investigation is necessary.
 </p>
