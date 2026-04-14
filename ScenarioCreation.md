@@ -29,7 +29,7 @@
       <li>To find valid Tor/.onion links that are still up, you can use this website: https://onion.live/</li>
     </ul>
   </li>
-  <li>Create a text file on the Desktop with "Tor" in the name and add miscellaneous text files to generate file creation activity.</li>
+  <li>Create a text file on the Desktop named <code>tor-shopping-list.txt</code> and add a few miscellaneous placeholder entries to generate file creation activity.</li>
 </ol>
 
 ---
