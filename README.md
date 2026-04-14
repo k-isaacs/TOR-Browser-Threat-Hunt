@@ -37,17 +37,14 @@ Management suspects that employees might be using the TOR Browser to bypass netw
 
 <h3>1. Reviewed <code>DeviceFileEvents</code> for tor-related file activity</h3>
 <p>
-The <code>DeviceFileEvents</code> table was reviewed for files containing the string
-"tor" on device ki-stigs under the labuser account. The results show tor-related file
-activity between 2026-04-09T01:26:48.5661396Z and 2026-04-09T01:50:55.9826167Z.
-Within that window, the logs show tor browser-related activity in the Downloads folder,
-followed by creation of multiple tor-related files on the Desktop, including
+Files containing the string "tor" were reviewed on device ki-stigs under the labuser
+account. The results show activity between 2026-04-09T01:26:48.5661396Z and
+2026-04-09T01:50:55.9826167Z, beginning with installer-related activity in the Downloads
+folder and followed by creation of multiple files on the Desktop, including
 <code>tor.exe</code>, <code>Tor Browser.lnk</code>, <code>Tor-Launcher.txt</code>,
-<code>Torbutton.txt</code>, and <code>tor.txt</code>. The same result set also shows
-later file creation activity for <code>tor-shopping-list.txt</code> and its related
-shortcut file, which helps show the activity was not limited to the installer alone.
-Taken together, the file events reflect tor-related files first being handled from
-Downloads and then appearing on the user’s Desktop during the same session.
+<code>Torbutton.txt</code>, and <code>tor-shopping-list.txt</code>. Taken together, the
+events show these artifacts appearing first in Downloads and later on the Desktop during
+the same session.
 </p>
 
 <p><strong>Query used to locate events:</strong></p>
@@ -66,12 +63,14 @@ Downloads and then appearing on the user’s Desktop during the same session.
 
 <h3>2. Reviewed <code>DeviceProcessEvents</code> for tor installer execution</h3>
 <p>
-The <code>DeviceProcessEvents</code> table was reviewed for a
-ProcessCommandLine containing <code>tor-browser-windows-x86_64-portable-15.0.9.exe</code>.
-The results show the installer was executed from the Downloads folder on device
-ki-stigs. At 2026-04-09T01:30:50.8034689Z, a ProcessCreated event shows labuser ran
+The <code>DeviceProcessEvents</code> table was reviewed for a ProcessCommandLine
+containing <code>tor-browser-windows-x86_64-portable-15.0.9.exe</code>. The results
+show the installer was executed from the Downloads folder on device ki-stigs. At
+2026-04-09T01:30:50.8034689Z, a ProcessCreated event shows labuser ran
 <code>tor-browser-windows-x86_64-portable-15.0.9.exe</code>, and the command line
 included the <code>/S</code> switch, indicating the installer was executed silently.
+The result set also shows another process creation event for the same file, supporting
+that the tor package was actively run and not only present on disk.
 </p>
 
 <p><strong>Query used to locate events:</strong></p>
@@ -196,10 +195,9 @@ ki-stigs under the labuser account.
 The reviewed file, process, and network events on device ki-stigs show that tor-related
 software was downloaded, executed silently, launched, and used under the labuser account
 during the reviewed time window. The evidence includes execution of
-<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code> with the <code>/s</code>
+<code>tor-browser-windows-x86_64-portable-15.0.9.exe</code> with the <code>/S</code>
 switch, creation of tor-related files on the Desktop, launch of
 <code>firefox.exe</code> and <code>tor.exe</code>, and successful network connections
 consistent with tor activity. If this activity was not authorized, the device should be
-reviewed for containment and the appropriate internal personnel should be notified for
-follow-on investigation.
+reviewed for containment and management should be notified for follow-on investigation.
 </p>
