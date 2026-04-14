@@ -80,8 +80,7 @@ included the <code>/S</code> switch, indicating the installer was executed silen
 | where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-15.0.9.exe"
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine</code></pre>
 
-<p><strong>Evidence:</strong></p>
-<p><img src="images/step2-deviceprocessevents-installer.png" alt="Step 2 - DeviceProcessEvents tor installer execution" style="max-width:100%; border:1px solid #ccc;"></p>
+<p><img src="Images/Step2_Logs.jpg" alt="Step 2 - DeviceProcessEvents tor installer execution" style="max-width:100%; border:1px solid #ccc;"></p>
 
 <hr>
 
@@ -104,8 +103,7 @@ activity after the initial execution.
 | project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
 | order by Timestamp desc</code></pre>
 
-<p><strong>Evidence:</strong></p>
-<p><img src="images/step3-deviceprocessevents-browser.png" alt="Step 3 - DeviceProcessEvents tor browser execution" style="max-width:100%; border:1px solid #ccc;"></p>
+<p><img src="Images/Step3_Logs.jpg" alt="Step 3 - DeviceProcessEvents tor browser execution" style="max-width:100%; border:1px solid #ccc;"></p>
 
 <hr>
 
@@ -130,8 +128,7 @@ launch.
 | project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName, InitiatingProcessFolderPath
 | order by Timestamp desc</code></pre>
 
-<p><strong>Evidence:</strong></p>
-<p><img src="images/step4-devicenetworkevents.png" alt="Step 4 - DeviceNetworkEvents tor-related network activity" style="max-width:100%; border:1px solid #ccc;"></p>
+<p><img src="Images/Step4_Logs.jpg" alt="Step 4 - DeviceNetworkEvents tor-related network activity" style="max-width:100%; border:1px solid #ccc;"></p>
 
 ---
 
